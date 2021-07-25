@@ -1,0 +1,247 @@
+---
+title: "Automating Data Extraction from Screenshots"
+subtitle: "`r paste0('<br/>To Support The Fundraising Fantasy ', emo::ji('soccer'), ' Game:<br/><br/>[ChampManFPL](https://twitter.com/FantasyChampMan)')`"
+author: "Dan Wakeling"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+background-image: url(libs/img/background_image.jpeg)
+background-position: 0% 0%
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(emo)
+library(tidyverse)
+library(magick)
+```
+
+???
+
+Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
+
+---
+
+class: center, middle, inverse
+
+# What is ChampManFPL?
+
+---
+
+# What is ChampManFPL?
+
+- A Fantasy `r emo::ji('soccer')` game created at the start of the COVID-19 pandemic.
+
+--
+
+- A simulation of fantasy football using then iconic management game Championship Manager 01-02.
+
+--
+
+- Brought a welcome escape through fantasy football, as all sport came to a hold.
+
+--
+
+- Collecting the data manually would take hours
+
+--
+
+- Featured on [BBC Sport](https://www.bbc.co.uk/sport/football/52181793)...
+
+---
+
+background-image: url(libs/img/bbc_sport.png)
+background-position:0% 0%
+background-size: 110%
+
+---
+
+background-image: url(libs/img/drive_images.png)
+background-position: 45% 50%
+background-size: 159%
+class: center, bottom, inverse
+
+# From Screenshots...
+
+---
+
+background-image: url(libs/img/stats_drive.jpg)
+background-position: 0% 0%
+background-size: 100%
+class: center, bottom, inverse
+
+# To Tidy Google Sheets!
+
+---
+
+class: inverse, center, middle
+
+# Let's Take a Look at a Typical Screenshot...
+
+---
+
+background-image: url(libs/img/leicester_leeds.png)
+background-size: 100%
+
+---
+
+background-image: url(libs/img/Inkedleicester_leeds.jpg)
+background-size: 100%
+
+class: center, bottom, inverse
+
+# And Let's Try to Read this Leeds Midfielder's Name, Highlighted in Orange
+
+---
+
+class: inverse, center, middle
+
+background-image: url(https://www.yorkshireeveningpost.co.uk/webimg/QVNIMTE4NDAyODI4.jpg?width=2048&enable=upscale)
+background-position: 0% 0%
+background-size: 100%
+
+# The Infamous Eirik Bakke
+
+<br><br>Image credit: [Yorkshire Evening Post](https://www.yorkshireeveningpost.co.uk/webimg/QVNIMTE4NDAyODI4.jpg?width=2048&enable=upscale)
+
+---
+
+background-image: url(libs/img/eirik_bakke.png)
+background-position: 50% 25%
+background-size: 60%
+class: split-main1
+
+.row[.content[
+## We can read this as Eirik Bakke...
+]]
+
+--
+
+.row[.content[
+## <br><br><br><br><br>But Tesseract struggles!
+]]
+
+.row[.content[
+
+```{r}
+
+tesseract::ocr_data(
+  "libs/img/eirik_bakke.png")$word
+
+```
+
+]]
+
+---
+
+class: inverse, center, middle
+
+# So What Do We Need To Do To Get Tesseract To Read The Name Correctly...
+
+---
+
+## Here is Our Original Image
+
+```{r}
+
+magick::image_read("libs/img/eirik_bakke.png")
+
+```
+
+--
+
+Negate The Image
+
+```{r}
+
+magick::image_read("libs/img/eirik_bakke.png") %>% 
+  image_negate() #<<
+
+```
+
+--
+
+<br>
+
+This may not look as easy on the eye, however Tesseract much prefers dark text on a light background.
+
+--
+
+### <br> Almost There!
+
+```{r}
+
+tesseract::ocr_data(
+  magick::image_read("libs/img/eirik_bakke.png") %>% 
+    image_negate())$word
+
+```
+
+---
+
+class: split-main1
+
+.row[.content[
+
+## Fill the Background...
+
+```{r}
+
+magick::image_read("libs/img/eirik_bakke.png") %>% 
+  image_negate() %>% 
+  image_fill(color = "#BFDCEE", fuzz = 22) %>% 
+  image_contrast(sharpen = 1)
+
+```
+
+]]
+
+--
+
+.row[.content[
+### This Works!
+]]
+
+.row[.content[
+
+```{r}
+
+# bakke, the eirik_bakke image, is from gw35
+letters_whitelist <- tesseract::tesseract(options = list(tessedit_char_whitelist = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ '"))
+tesseract::ocr_data(
+  magick::image_read("libs/img/eirik_bakke.png") %>% 
+    image_negate() %>% image_fill(color = "#BFDCEE", fuzz = 22) %>% 
+    image_background(color = "#000080") %>% 
+    image_contrast(sharpen = 1),
+  engine = letters_whitelist)$word
+
+```
+
+]]
+
+---
+
+```{r}
+library(magrittr)
+library(magick)
+
+letters_whitelist <- tesseract::tesseract(options = list(tessedit_char_whitelist = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ -'"))
+
+tesseract::ocr_data("C:/Users/DW24/OneDrive - Ricardo Plc/Code/cmfpl/present_work/libs/img/eirik_bakke.png",
+                    engine = letters_whitelist)$word
+
+magick::image_read("C:/Users/DW24/OneDrive - Ricardo Plc/Code/cmfpl/present_work/libs/img/eirik_bakke.png") %>% 
+  image_negate() %>%
+  image_fill(color = "#BFDCEE", fuzz = 22) %>%
+  image_background(color = "#000080") %>%
+  image_contrast(sharpen = 1) %>% 
+  tesseract::ocr_data(engine = letters_whitelist)
+
+```
+
+
