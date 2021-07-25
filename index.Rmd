@@ -56,7 +56,7 @@ class: center, middle, inverse
 ---
 
 background-image: url(libs/img/bbc_sport.png)
-background-position:0% 0%
+background-position: 0% 0%
 background-size: 110%
 
 ---
@@ -223,25 +223,4 @@ tesseract::ocr_data(
 ```
 
 ]]
-
----
-
-```{r}
-library(magrittr)
-library(magick)
-
-letters_whitelist <- tesseract::tesseract(options = list(tessedit_char_whitelist = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ -'"))
-
-tesseract::ocr_data("C:/Users/DW24/OneDrive - Ricardo Plc/Code/cmfpl/present_work/libs/img/eirik_bakke.png",
-                    engine = letters_whitelist)$word
-
-magick::image_read("C:/Users/DW24/OneDrive - Ricardo Plc/Code/cmfpl/present_work/libs/img/eirik_bakke.png") %>% 
-  image_negate() %>%
-  image_fill(color = "#BFDCEE", fuzz = 22) %>%
-  image_background(color = "#000080") %>%
-  image_contrast(sharpen = 1) %>% 
-  tesseract::ocr_data(engine = letters_whitelist)
-
-```
-
 
