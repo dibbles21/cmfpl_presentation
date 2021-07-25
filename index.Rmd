@@ -11,21 +11,12 @@ output:
       countIncrementalSlides: false
 ---
 
-background-image: url(libs/img/background_image.jpeg)
-background-position: 0% 0%
-
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 library(emo)
 library(tidyverse)
 library(magick)
 ```
-
-???
-
-Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
-
----
 
 class: center, middle, inverse
 
@@ -90,7 +81,7 @@ background-size: 100%
 
 ---
 
-background-image: url(libs/img/Inkedleicester_leeds.jpg)
+background-image: url(libs/img/Inkedleicester_leeds.png)
 background-size: 100%
 
 class: center, bottom, inverse
@@ -105,7 +96,7 @@ background-image: url(https://www.yorkshireeveningpost.co.uk/webimg/QVNIMTE4NDAy
 background-position: 0% 0%
 background-size: 100%
 
-# The Infamous Eirik Bakke
+# The Mighty Eirik Bakke!
 
 <br><br>Image credit: [Yorkshire Evening Post](https://www.yorkshireeveningpost.co.uk/webimg/QVNIMTE4NDAyODI4.jpg?width=2048&enable=upscale)
 
@@ -136,6 +127,16 @@ tesseract::ocr_data(
 ```
 
 ]]
+
+---
+
+class: top, center
+
+background-image: url(libs/img/confused_reading.png)
+background-position: 50% 100%
+background-size: 80%
+
+# Te 3?!
 
 ---
 
@@ -204,7 +205,7 @@ magick::image_read("libs/img/eirik_bakke.png") %>%
 --
 
 .row[.content[
-### This Works!
+## This Works `r emo::ji("smile")`!
 ]]
 
 .row[.content[
