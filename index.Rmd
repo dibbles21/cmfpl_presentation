@@ -108,7 +108,7 @@ background-size: 60%
 class: split-main1
 
 .row[.content[
-## We can read this as Eirik Bakke...
+## As humans, we can read this as Eirik Bakke...
 ]]
 
 --
@@ -146,7 +146,7 @@ class: inverse, center, middle
 
 ---
 
-## Here is Our Original Image
+# Here is Our Original Image
 
 ```{r}
 
@@ -156,7 +156,9 @@ magick::image_read("libs/img/eirik_bakke.png")
 
 --
 
-Negate The Image
+<br>
+
+# Negate The Image
 
 ```{r}
 
@@ -171,9 +173,15 @@ magick::image_read("libs/img/eirik_bakke.png") %>%
 
 This may not look as easy on the eye, however Tesseract much prefers dark text on a light background.
 
---
+---
 
-### <br> Almost There!
+class: inverse, center, middle
+
+# So How Does Tesseract Do With The Negated Image?
+
+---
+
+# Bung It Into R...
 
 ```{r}
 
@@ -182,6 +190,16 @@ tesseract::ocr_data(
     image_negate())$word
 
 ```
+
+<br>
+
+# And This Is Much More Like It!
+
+---
+
+class: inverse, center, middle
+
+# A Few More Tweaks Now...
 
 ---
 
