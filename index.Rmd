@@ -58,6 +58,9 @@ class: center, middle, inverse
 background-image: url(libs/img/bbc_sport.png)
 background-position: 0% 0%
 background-size: 110%
+class: center, bottom, inverse
+
+# Testing...
 
 ---
 
