@@ -59,7 +59,7 @@ class: center, middle, inverse
 ---
 
 background-image: url(libs/img/bbc_sport.png)
-background-position:0% 0%
+background-position: 0% 0%
 background-size: 110%
 
 ---
@@ -238,62 +238,6 @@ tesseract::ocr_data(
 ```
 
 ]]
-
----
-
-
-```r
-library(magrittr)
-```
-
-```
-## 
-## Attaching package: 'magrittr'
-```
-
-```
-## The following object is masked from 'package:purrr':
-## 
-##     set_names
-```
-
-```
-## The following object is masked from 'package:tidyr':
-## 
-##     extract
-```
-
-```r
-library(magick)
-
-letters_whitelist &lt;- tesseract::tesseract(options = list(tessedit_char_whitelist = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ -'"))
-
-tesseract::ocr_data("C:/Users/DW24/OneDrive - Ricardo Plc/Code/cmfpl/present_work/libs/img/eirik_bakke.png",
-                    engine = letters_whitelist)$word
-```
-
-```
-## [1] "Te" "s"
-```
-
-```r
-magick::image_read("C:/Users/DW24/OneDrive - Ricardo Plc/Code/cmfpl/present_work/libs/img/eirik_bakke.png") %&gt;% 
-  image_negate() %&gt;%
-  image_fill(color = "#BFDCEE", fuzz = 22) %&gt;%
-  image_background(color = "#000080") %&gt;%
-  image_contrast(sharpen = 1) %&gt;% 
-  tesseract::ocr_data(engine = letters_whitelist)
-```
-
-```
-## # A tibble: 3 x 3
-##   word  confidence bbox       
-##   &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;      
-## 1 Eirik       37.4 8,7,34,16  
-## 2 Bakke       96.6 39,7,73,16 
-## 3 -            0   106,0,111,1
-```
-
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
