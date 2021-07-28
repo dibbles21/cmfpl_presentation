@@ -9,6 +9,8 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+      # ratio: 16:9
+
 ---
 
 ```{r setup, include=FALSE}
@@ -30,7 +32,7 @@ class: center, middle, inverse
 
 --
 
-- A simulation of fantasy football using then iconic management game Championship Manager 01-02
+- A simulation of fantasy football using the iconic management game Championship Manager 01-02
 
 --
 
@@ -38,17 +40,11 @@ class: center, middle, inverse
 
 --
 
+- Raised over £3,500 for Trussell Trust, through the [generous donations of players](https://justgiving.com/fundraising/FantasyChampMan)
+
+--
+
 - Collecting the data manually would take hours
-
----
-
-class: right, middle
-
-background-image: url(libs/img/bbc_sport.PNG)
-background-position: 0% 0%
-background-size: 108%
-
-# [Featured on BBC Sport](https://www.bbc.co.uk/sport/football/52181793) `r emo::ji("party")`
 
 ---
 
