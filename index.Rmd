@@ -1,7 +1,7 @@
 ---
 title: "Automating Data Extraction from Screenshots"
 subtitle: "`r paste0('<br/>To Support The Fundraising Fantasy ', emo::ji('soccer'), ' Game:<br/><br/>[ChampManFPL](https://twitter.com/FantasyChampMan)')`"
-author: "Dan Wakeling"
+author: "<br/><br/>Dan Wakeling"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -10,7 +10,6 @@ output:
       highlightLines: true
       countIncrementalSlides: false
       # ratio: 16:9
-
 ---
 
 ```{r setup, include=FALSE}
@@ -19,6 +18,24 @@ library(emo)
 library(tidyverse)
 library(magick)
 ```
+
+background-image: url(libs/img/drive_images.PNG)
+background-position: 45% 50%
+background-size: 159%
+class: center, bottom, inverse
+
+# From Screenshots... 
+
+---
+
+background-image: url(libs/img/stats_drive.jpg)
+background-position: 0% 0%
+background-size: 100%
+class: center, bottom, inverse
+
+# To Tidy Google Sheets!
+
+---
 
 class: center, middle, inverse
 
@@ -35,34 +52,38 @@ class: center, middle, inverse
 - A simulation of fantasy football using the iconic management game Championship Manager 01-02
 
 --
-
-- Brought a welcome escape through fantasy football, as all sport came to a hold
-
---
-
+  
 - Raised over £3,500 for Trussell Trust, through the [generous donations of players](https://justgiving.com/fundraising/FantasyChampMan)
 
 --
 
+- Brought a welcome escape through fantasy football, as all sport came to a hold
+
+---
+
+class: right, middle
+
+background-image: url(libs/img/bbc_sport.PNG)
+background-position: 0% 0%
+background-size: 108%
+
+# [And Featured on BBC Sport](https://www.bbc.co.uk/sport/football/52181793) `r emo::ji("party")`
+
+---
+
+class: center, middle, inverse
+
+# Where was there scope for automation?
+
+---
+
+# Where was there scope for automation?
+
 - Collecting the data manually would take hours
 
----
+--
 
-background-image: url(libs/img/drive_images.PNG)
-background-position: 45% 50%
-background-size: 159%
-class: center, bottom, inverse
-
-# From Screenshots...
-
----
-
-background-image: url(libs/img/stats_drive.jpg)
-background-position: 0% 0%
-background-size: 100%
-class: center, bottom, inverse
-
-# To Tidy Google Sheets!
+- Insert text...
 
 ---
 
